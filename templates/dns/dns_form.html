@@ -1,0 +1,15 @@
+{% extends "layout/base.html" %}
+{% block title %}Registrar DNS{% endblock %}
+{% block content %}
+
+{% load static %}
+<h2>{{ view.object.pk|yesno:"Editar DNS,Registrar DNS" }}</h2>
+<form method="post">
+  {% csrf_token %}
+
+  {{ form.as_p }}
+
+  <button type="submit" class="btn btn-success">Guardar</button>
+  <a href="{% url 'dns-list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "layout/base.html" %}
+{% block title %}Servidores{% endblock %}
+{% block content %}
+{% load static %}
+<h2>Servidores</h2>
+<a href="{% url 'server_create' %}" class="btn btn-primary mb-3">+ Nuevo servidor</a>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>IP</th>
+      <th>Hostname</th>
+      <th>SO</th>
+      <th>Estado</th>
+      <th>OS</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for server in servers %}
+    <tr>
+      <td>{{ server.server_name }}</td>
+      <td>{{ server.ip }}</td>
+      <td>{{ server.server_hostname }}</td>
+      <td>{{ server.server_os }}</td>
+      <td>{{ server.get_server_status_display }}</td>
+      <td>
+        {{server.server_os.os_type}}
+        {% if server.server_os.os_type == 'Linux' %}
+          <img src="{% static 'img/linux.svg' %}" alt="Linux" width="24">
+        {% else %}
+          <img src="{% static 'img/windows.svg' %}" alt="Windows" width="24">
+        {% endif %}
+      </td>
+      <td>
+        {% comment %} <a href="{% url 'server_detail' server.id %}" class="btn btn-sm btn-success">Ver</a> {% endcomment %}
+        <a href="{% url 'server_update' server.id %}" class="btn btn-sm btn-primary">Editar</a>
+        <a href="{% url 'server_delete' server.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

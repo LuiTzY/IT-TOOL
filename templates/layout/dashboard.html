@@ -1,0 +1,96 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<!-- Fila para el chart -->
+<div class="row mb-4">
+  <div class="col-12">
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <h6 class="card-title text-muted mb-3">Distribución General</h6>
+        <div id="main" style="width: 100%; height: 400px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cards de métricas -->
+<div class="row g-4 mb-4">
+  <!-- Primera card -->
+  <div class="col-md-3">
+    <div class="card shadow-sm border-0 h-100">
+      <div class="card-body">
+        <h6 class="card-title text-muted">Servidores</h6>
+        <h3 class="card-text fw-bold">{{servers}}</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Segunda card -->
+  <div class="col-md-3">
+    <div class="card shadow-sm border-0 h-100">
+      <div class="card-body">
+        <h6 class="card-title text-muted">Servidores DNS</h6>
+        <h3 class="card-text fw-bold">{{dns}}</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tercera card -->
+  <div class="col-md-3">
+    <div class="card shadow-sm border-0 h-100">
+      <div class="card-body">
+        <h6 class="card-title text-muted">Entradas DNS</h6>
+        <h3 class="card-text fw-bold">{{dns_entrys}}</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tabla de resumen -->
+<div class="card shadow-sm border-0">
+  <div class="card-header bg-white">
+    <h6 class="mb-0">🖥️ Últimos servidores registrados</h6>
+  </div>
+  <div class="card-body p-0">
+    <table class="table table-hover mb-0">
+      <thead class="table-light">
+        <tr>
+          <th>OS</th>
+          <th>Nombre</th>
+          <th>IP</th>
+          <th>Hostname</th>
+          <th>SO</th>
+          <th>Entorno</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for server in last_added_servers %}
+        <tr>
+          <td>
+            {{server.server_os.os_type}}
+            {% if server.server_os.os_type == 'Linux' %}
+              <img src="{% static 'img/linux.svg' %}" alt="Linux" width="24">
+            {% else %}
+              <img src="{% static 'img/windows.svg' %}" alt="Windows" width="24">
+            {% endif %}
+          </td>
+          <td>{{server.server_name}}</td>
+          <td>{{server.ip}}</td>
+          <td>{{server.server_hostname}}</td>
+          <td>{{server.server_os}}</td>
+          <td>{{server.server_environment}}</td>
+          <td>{{server.server_status}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script src="{% static 'js/chart.js' %}"></script>
+{% endblock %}

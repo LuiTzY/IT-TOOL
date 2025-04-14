@@ -1,0 +1,53 @@
+{% extends "layout/base.html" %}
+{% block title %}DNS ENTRY{% endblock %}
+{% block content %}
+<h2>DNS </h2>
+<a href="{% url 'dns_entry_add' %}" class="btn btn-success mb-3">+ Nueva Entrada DNS</a>
+<table id="dns" class="table table-bordered table-striped" >
+  <thead>
+    <tr>
+      <th>Nombre de Entrada</th>
+      <th>Tipo de Entrada</th>
+      <th>Valor</th>
+      <th>Servidor</th>
+      <th>DNS</dns/>
+      <th>Descripcion</th>
+      <th>Creado el</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for e in entry %}
+    <tr>
+      <td>{{ e.entry_name }}</td>
+      <td>{{ e.entry_type }}</td>
+      <td>{{ e.value }}</td>
+      <td>{{ e.server }}</td>
+      <td>{{ e.dns_server }}</td>
+      <td>{{ e.descripcion }}</td>
+      <td>{{ e.created_at }}</td>
+
+      <td>
+        <a href="{% url 'dns_entry_update' e.id %}" class="btn btn-sm btn-primary">Editar</a>
+        <a href="{% url 'dns_entry_delete' e.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<script>console.log(typeof $);
+
+    console.log($('#dns'))
+
+    $(document).ready(function() {
+      $('#dns').DataTable({
+        dom: 'Bfrtip',
+        buttons: ['excel', 'pdf'],
+     
+            buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    
+      });
+    });
+  </script>
+{% endblock %}

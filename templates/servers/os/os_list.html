@@ -1,0 +1,36 @@
+{% extends "layout/base.html" %}
+{% block title %}Sistemas Operativos{% endblock %}
+{% block content %}
+<h2>Sistemas Operativos</h2>
+<a href="{% url 'os_create' %}" class="btn btn-primary mb-3">+ Nuevo SO</a>
+<table class="table table-bordered table-striped">
+  <thead class="table-light">
+    <tr>
+      <th>Nombre</th>
+      <th>Versión</th>
+      <th>OS IMG</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for so in sistemas %}
+    <tr>
+      <td>{{ so.nombre }}</td>
+      <td>{{ so.version }}</td>
+      <td>
+        {% if so.os_img %}
+          <img src="{{ so.os_img.url }}" alt="Logo" style="width: 40px; height: auto;">
+        {% else %}
+          <span class="text-muted">Sin logo</span>
+        {% endif %}
+      </td>
+      <td>
+        <a href="{% url 'os_update' so.id %}" class="btn btn-sm btn-primary">Editar</a>
+        <a href="{% url 'os_delete' so.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+      </td>
+     
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

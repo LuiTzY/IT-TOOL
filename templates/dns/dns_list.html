@@ -1,0 +1,33 @@
+{% extends "layout/base.html" %}
+{% block title %}DNS SERVERS{% endblock %}
+{% block content %}
+<h2>DNS </h2>
+<a href="{% url 'dns-add' %}" class="btn btn-primary mb-3">+ Nuevo DNS</a>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>IP</th>
+      <th>TIPO</th>
+      <th>Creado el</th>
+      <th>Actualizado el</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for dn in dns %}
+    <tr>
+      <td>{{ dn.name }}</td>
+      <td>{{ dn.ip }}</td>
+      <td>{{ dn.tipo }}</td>
+      <td>{{ dn.created_at }}</td>
+      <td>{{ dn.updated_at }}</td>
+      <td>
+        <a href="{% url 'dns_update' dn.id %}" class="btn btn-sm btn-primary">Editar</a>
+        <a href="{% url 'dns_delete' dn.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

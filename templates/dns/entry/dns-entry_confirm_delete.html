@@ -1,0 +1,10 @@
+{% extends "layout/base.html" %}
+{% block content %}
+<h2>¿Eliminar entrada DNS?</h2>
+<p>¿Estás seguro de que deseas eliminar <strong>{{ object }}</strong>?</p>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+  <a href="{% url 'dns_entry_list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
