@@ -12,13 +12,12 @@ ServerDocs nace con el objetivo de proporcionar una herramienta sencilla pero po
 
 ## ⚙️ Funcionalidades Incluidas
 
-- 🔧 **Gestión de servidores:** Registro, edición, eliminación y listado con filtros.
-- 🌐 **Entradas DNS:** Asociación de entradas A, CNAME y otros tipos a servidores.
-- 🧠 **Sistemas Operativos:** Registro de SO con imagen/logotipo visible.
-- 📊 **Dashboard visual:** Contadores, gráficas (Chart.js) y últimas entradas.
-- 🔒 **Autenticación:** Login requerido para todas las vistas sensibles.
-- 🧾 **Exportación de datos:** Listados interactivos con DataTables (Excel, PDF, copiar).
-- 🧪 **Pruebas manuales y automatizadas:** Pruebas funcionales y flujo de login con Selenium.
+-  **Gestión de servidores:** Registro, edición, eliminación y listado con filtros.
+-  **Entradas DNS:** Asociación de entradas A, CNAME y otros tipos a servidores.
+-  **Sistemas Operativos:** Registro de SO con imagen/logotipo visible.
+- **Dashboard visual:** Contadores, gráficas (Chart.js) y últimas entradas.
+-  **Autenticación:** Login requerido para todas las vistas sensibles.
+-  **Pruebas manuales y automatizadas:** Pruebas funcionales y flujo de login con Selenium.
 
 ---
 
