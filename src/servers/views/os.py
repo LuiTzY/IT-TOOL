@@ -4,16 +4,17 @@ from ..models import Server, OS
 from ..forms import ServerForm,OSForm
  
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 
-class OSListView(ListView):
+class OSListView(LoginRequiredMixin,ListView):
     model = OS
     template_name = 'servers/os/os_list.html'
     #variable disponible al renderizar la vista(como si fuera un context)
     context_object_name = 'sistemas'
 
-class OSCreateView(CreateView):
+class OSCreateView(LoginRequiredMixin,CreateView):
     model = OS
     form_class = OSForm
     template_name = 'servers/os/os_form.html'
@@ -25,7 +26,7 @@ class OSCreateView(CreateView):
         messages.success(self.request, f" Sistema '{self.object.server_name}' creado exitosamente.")
         return response
 
-class OSUpdateView(UpdateView):
+class OSUpdateView(LoginRequiredMixin,UpdateView):
     model = OS
     form_class = OSForm
     template_name = 'servers/os/os_form.html'
@@ -38,7 +39,7 @@ class OSUpdateView(UpdateView):
         return response
 
 
-class OSDeleteView(DeleteView):
+class OSDeleteView(LoginRequiredMixin,DeleteView):
     model = OS
     template_name = 'servers/os/os_confirm_delete.html'
     success_url = reverse_lazy('os_list')

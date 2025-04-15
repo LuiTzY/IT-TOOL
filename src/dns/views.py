@@ -6,14 +6,15 @@ from .forms import *
 
 from django.contrib import messages
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 #Vistas 
-class DNSListView(ListView):
+class DNSListView(LoginRequiredMixin,ListView):
     model = DNS
     template_name = 'dns/dns_list.html'
     context_object_name = 'dns'
 
-class DNSCreateView(CreateView):
+class DNSCreateView(LoginRequiredMixin,CreateView):
     model = DNS
     form_class = DNSForm
     template_name = 'dns/dns_form.html'
@@ -24,7 +25,7 @@ class DNSCreateView(CreateView):
         messages.success(self.request, f"DNS '{self.object.server_name}' creado exitosamente.")
         return response
 
-class DNSUpdateView(UpdateView):
+class DNSUpdateView(LoginRequiredMixin,UpdateView):
     model = DNS
     form_class = DNSForm
     template_name = 'dns/dns_form.html'
@@ -35,7 +36,7 @@ class DNSUpdateView(UpdateView):
         messages.success(self.request, f"DNS '{self.object.server_name}' actualizado exitosamente.")
         return response
     
-class DNSDeleteView(DeleteView):
+class DNSDeleteView(LoginRequiredMixin,DeleteView):
     model = DNS
     template_name = 'dns/dns_confirm_delete.html'
     success_url = reverse_lazy('dns-list')
@@ -48,7 +49,7 @@ class DNSDeleteView(DeleteView):
         messages.success(self.request, f"DNS '{server_name}' eliminado exitosamente.")
         return response
 
-class DNSDetailView(DetailView):
+class DNSDetailView(LoginRequiredMixin,DetailView):
     model = DNS
     template_name = 'dns/dns_detail.html'
     context_object_name = 'dns'
@@ -59,12 +60,12 @@ class DNSDetailView(DetailView):
 
 #Vistas para las entradas dns
 
-class DNSEntryListView(ListView):
+class DNSEntryListView(LoginRequiredMixin,ListView):
     model = DNSEntry
     template_name = 'dns/entry/dns_entry_list.html'
     context_object_name = 'entry'
 
-class DNSEntryCreateView(CreateView):
+class DNSEntryCreateView(LoginRequiredMixin,CreateView):
     model = DNSEntry
     form_class = DNSEntryForm
     template_name = 'dns/entry/dns-entry_form.html'
@@ -72,11 +73,11 @@ class DNSEntryCreateView(CreateView):
     
     def form_valid(self, form):
         response = super().form_valid(form)
-        messages.success(self.request, f" Entrada DNS '{self.object.server_name}' creado exitosamente.")
+        messages.success(self.request, f" Entrada DNS '{self.object.entry_name}' creado exitosamente.")
         return response
 
 
-class DNSEntryUpdateView(UpdateView):
+class DNSEntryUpdateView(LoginRequiredMixin,UpdateView):
     model = DNSEntry
     form_class = DNSEntryForm
     template_name = 'dns/entry/dns-entry_form.html'
@@ -85,22 +86,22 @@ class DNSEntryUpdateView(UpdateView):
     
     def form_valid(self, form):
         response = super().form_valid(form)
-        messages.success(self.request, f" Entrada DNS '{self.object.server_name}' actualizado exitosamente.")
+        messages.success(self.request, f" Entrada DNS '{self.object.entry_name}' actualizado exitosamente.")
         return response
 
-class DNSEntryDeleteView(DeleteView):
+class DNSEntryDeleteView(LoginRequiredMixin,DeleteView):
     model = DNSEntry
     template_name = 'dns/entry/dns-entry_confirm_delete.html'
     success_url = reverse_lazy('dns_entry_list')
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
-        server_name = self.object.server_name  # Guardamos el nombre antes de borrar
+        server_name = self.object.entry_name  # Guardamos el nombre antes de borrar
         response = super().delete(request, *args, **kwargs)
         messages.success(self.request, f"Entrada DNS '{server_name}' eliminado exitosamente.")
         return response
 
-class DNSEntryDetailView(DetailView):
+class DNSEntryDetailView(LoginRequiredMixin,DetailView):
     model = DNSEntry
     template_name = 'dns/entry/dns-entry_detail.html'
     context_object_name = 'entry'

@@ -15,7 +15,7 @@ from src.dns.models import *
 from src.servers.models import *
 from django.http import JsonResponse
 
-
+@login_required()
 def os_servers_counts(request):
     context = {}
     servers = Server.objects.all()
@@ -29,7 +29,7 @@ def os_servers_counts(request):
     return JsonResponse (context)
 
 #vista principal de la app
-
+@login_required()
 def home(request):
     context = {}
     
@@ -85,3 +85,4 @@ def signout(request):
     return redirect('singin')
 
 #View para cargar perfil del usuario
+

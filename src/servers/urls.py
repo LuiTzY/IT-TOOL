@@ -16,7 +16,7 @@ SERVERS_PATHS = [
 
 OS_PATHS = [   
     path('os/', OSListView.as_view(), name='os_list'),
-    path('os/nuevo/', OSCreateView.as_view(), name='os_create'),
+    path('os/agregar/', OSCreateView.as_view(), name='os_create'),
     path('os/<int:pk>/editar/', OSUpdateView.as_view(), name='os_update'),
     path('os/<int:pk>/eliminar/', OSDeleteView.as_view(), name='os_delete'),
 ]

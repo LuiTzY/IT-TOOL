@@ -94,7 +94,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-LOGIN_REDIRECT_URL="singin"
+LOGIN_URL="/singin/"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/

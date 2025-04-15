@@ -56,7 +56,7 @@
       </div>
       
       <a href="/os/" class="nav-link ">
-        <i class="bi bi-hdd-network me-2"></i> OS
+        <i class="bi bi-hdd-rack-fill"></i> OS
       </a>
 
       <a href="/servidores/" class="nav-link ">
@@ -73,12 +73,17 @@
   <div class="main-content">
     {% if messages %}
       <div class="container mt-3">
-        {% for message in messages %}
-          <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-          </div>
-        {% endfor %}
+          {% for message in messages %}
+            {% if message.tags == 'error' %}
+              {% comment %} Bootstrap no tiene alert-error, usamos alert-danger {% endcomment %}
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {% else %}
+              <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {% endif %}
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+            </div>
+          {% endfor %}
       </div>
     {% endif %}
     {% block content %}{% endblock %}

@@ -4,7 +4,7 @@ from .views import *
 
 DNS_PATHS = [
     path('dns/', DNSListView.as_view(), name='dns-list'),
-    path('dns/add/', DNSCreateView.as_view(), name='dns-add'),
+    path('dns/agregar/', DNSCreateView.as_view(), name='dns-add'),
     path('dns/<int:pk>/edit/', DNSUpdateView.as_view(), name='dns_update'),
     path('dns/<int:pk>/delete/', DNSDeleteView.as_view(), name='dns_delete'),
 ]
