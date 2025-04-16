@@ -23,12 +23,12 @@ ServerDocs nace con el objetivo de proporcionar una herramienta sencilla pero po
 
 ## 💻 Tecnologías utilizadas
 
-- **Backend:** Django (Python)
+- **Backend:** Django 5.2 (Python)
 - **Frontend:** HTML, CSS, Bootstrap 5
 - **Gráficas:** Chart.js
 - **Interactividad:** JavaScript, Fetch API
-- **Base de Datos:** SQLite (desarrollo) / PostgreSQL (producción opcional)
-- **Pruebas:** Selenium, Django Test Client
+- **Base de Datos:** SQLite (desarrollo) / MySQL (producción opcional)
+- **Pruebas:** Selenium
 - **Gestión:** Azure DevOps (User Stories, Epics, Test Plans)
 
 ---
